@@ -135,7 +135,7 @@ eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eM
     if( ( ucSlaveAddress == MB_ADDRESS_BROADCAST ) ||
         ( ucSlaveAddress < MB_ADDRESS_MIN ) || ( ucSlaveAddress > MB_ADDRESS_MAX ) )
     {
-        eStatus = MB_ENIVAL;
+        eStatus = MB_EINVAL;
     }
     else
     {

@@ -21,15 +21,15 @@
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
-#include "stm32f4xx_hal_tim.h"
+#include "stm32f4xx_ll_tim.h"
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
  
-#define MODBUS_TIMER TIM6
+#include "defines.h"
 
 /* ----------------------- static functions ---------------------------------*/
-static void prvvTIMERExpiredISR( void );
+void prvvTIMERExpiredISR( void );
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
@@ -44,19 +44,28 @@ inline void
 vMBPortTimersEnable(  )
 {
     /* Enable the timer with the timeout passed to xMBPortTimersInit( ) */
+    LL_TIM_ClearFlag_UPDATE(MODBUS_TIMER);
+    LL_TIM_EnableIT_UPDATE(MODBUS_TIMER);
+    LL_TIM_SetCounter(MODBUS_TIMER, 0);
+    LL_TIM_EnableCounter(MODBUS_TIMER);
 }
 
 inline void
 vMBPortTimersDisable(  )
 {
     /* Disable any pending timers. */
+    LL_TIM_DisableCounter(MODBUS_TIMER);
+    LL_TIM_SetCounter(MODBUS_TIMER, 0);
+    LL_TIM_DisableIT_UPDATE(MODBUS_TIMER);
+    LL_TIM_ClearFlag_UPDATE(MODBUS_TIMER);
 }
 
-/* Create an ISR which is called whenever the timer has expired. This function
+/* 
+ * Create an ISR which is called whenever the timer has expired. This function
  * must then call pxMBPortCBTimerExpired( ) to notify the protocol stack that
  * the timer has expired.
  */
-static void prvvTIMERExpiredISR( void )
+void prvvTIMERExpiredISR( void )
 {
     ( void )pxMBPortCBTimerExpired(  );
 }

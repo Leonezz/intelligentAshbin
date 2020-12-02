@@ -5,6 +5,8 @@
         "*.tex": "latex",
         "stm32f4xx_ll_tim.h": "c",
         "stm32f4xx.h": "c",
-        "stm32f4xx_hal.h": "c"
+        "stm32f4xx_hal.h": "c",
+        "mbconfig.h": "c",
+        "mbrtu.h": "c"
     }
 }

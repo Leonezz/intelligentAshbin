@@ -7,9 +7,7 @@
                 "label": "build",
                 "type": "shell",
                 "command": "make",
-                "args": [
-                    "-j4"
-                ] 
+                "args": []
             },
             {
                 "label": "clean",

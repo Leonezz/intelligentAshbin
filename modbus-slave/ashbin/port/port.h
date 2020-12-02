@@ -24,13 +24,15 @@
 
 #include <assert.h>
 #include <inttypes.h>
-
+#include "stm32f407xx.h"
 #define	INLINE                      inline
 #define PR_BEGIN_EXTERN_C           extern "C" {
 #define	PR_END_EXTERN_C             }
 
-#define ENTER_CRITICAL_SECTION( )   
-#define EXIT_CRITICAL_SECTION( )    
+// enter critical section : disable irq
+#define ENTER_CRITICAL_SECTION( )   __disable_irq()
+// exit critical section : enable irq 
+#define EXIT_CRITICAL_SECTION( )    __enable_irq()
 
 typedef uint8_t BOOL;
 

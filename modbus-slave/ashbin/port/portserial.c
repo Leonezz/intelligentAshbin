@@ -25,13 +25,16 @@
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
-
-/* ----------------------- static functions ---------------------------------*/
-static void prvvUARTTxReadyISR( void );
-static void prvvUARTRxISR( void );
-
 // modbus serial port is USART2
-#define MODBUS_USART USART2
+#include "defines.h"
+
+#include "log.h"
+/* ----------------------- static functions ---------------------------------*/
+void prvvUARTTxReadyISR( void );
+void prvvUARTRxISR( void );
+
+
+
 
 /* ----------------------- Start implementation -----------------------------*/
 void
@@ -61,7 +64,7 @@ vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
     else
     {
         // disable serial transmit data register
-        LL_USART_EnableIT_TXE(MODBUS_USART);
+        LL_USART_DisableIT_TXE(MODBUS_USART);
     }
     
 }
@@ -83,6 +86,7 @@ xMBPortSerialPutByte( CHAR ucByte )
      * */
     // transmit a byte through LL
     LL_USART_TransmitData8(MODBUS_USART,(uint8_t)ucByte);
+    LOGI("send char: %d",ucByte);
     return TRUE;
 }
 
@@ -95,6 +99,7 @@ xMBPortSerialGetByte( CHAR * pucByte )
      */
     // receive bytes through LL
     *pucByte = LL_USART_ReceiveData8(MODBUS_USART);
+    LOGI("get char: %d",*pucByte);
     return TRUE;
 }
 
@@ -105,7 +110,7 @@ xMBPortSerialGetByte( CHAR * pucByte )
  * a new character can be sent. The protocol stack will then call 
  * xMBPortSerialPutByte( ) to send the character.
  */
-static void prvvUARTTxReadyISR( void )
+void prvvUARTTxReadyISR( void )
 {
     pxMBFrameCBTransmitterEmpty(  );
 }
@@ -116,7 +121,7 @@ static void prvvUARTTxReadyISR( void )
  * protocol stack will then call xMBPortSerialGetByte( ) to retrieve the
  * character.
  */
-static void prvvUARTRxISR( void )
+void prvvUARTRxISR( void )
 {
     pxMBFrameCBByteReceived(  );
 }
