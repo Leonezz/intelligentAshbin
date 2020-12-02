@@ -20,7 +20,8 @@
  */
 
 #include "port.h"
-
+/* include stm32 ll file */
+#include "stm32f4xx_ll_usart.h"
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
@@ -29,40 +30,76 @@
 static void prvvUARTTxReadyISR( void );
 static void prvvUARTRxISR( void );
 
+// modbus serial port is USART2
+#define MODBUS_USART USART2
+
 /* ----------------------- Start implementation -----------------------------*/
 void
 vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 {
-    /* If xRXEnable enable serial receive interrupts. If xTxENable enable
+    /* 
+     * If xRXEnable enable serial receive interrupts. If xTxENable enable
      * transmitter empty interrupts.
      */
+    // enable serial receive interrupts or disable
+    if(xRxEnable)
+    {
+        // enable the USART receive data reguster
+        LL_USART_EnableIT_RXNE(MODBUS_USART);
+    }
+    else
+    {
+        // disable the USART receive data register
+        LL_USART_DisableIT_RXNE(MODBUS_USART);
+    }
+    // enable serial transmit interrupts or disable
+    if(xTxEnable)
+    {
+        // enable serial transmit data register
+        LL_USART_EnableIT_TXE(MODBUS_USART);
+    }
+    else
+    {
+        // disable serial transmit data register
+        LL_USART_EnableIT_TXE(MODBUS_USART);
+    }
+    
 }
 
 BOOL
 xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
 {
-    return FALSE;
+    // serial will be initialized in the main function,pass
+    return TRUE;
 }
 
 BOOL
 xMBPortSerialPutByte( CHAR ucByte )
 {
-    /* Put a byte in the UARTs transmit buffer. This function is called
+    /* 
+     * Put a byte in the UARTs transmit buffer. This function is called
      * by the protocol stack if pxMBFrameCBTransmitterEmpty( ) has been
-     * called. */
+     * called. 
+     * */
+    // transmit a byte through LL
+    LL_USART_TransmitData8(MODBUS_USART,(uint8_t)ucByte);
     return TRUE;
 }
 
 BOOL
 xMBPortSerialGetByte( CHAR * pucByte )
 {
-    /* Return the byte in the UARTs receive buffer. This function is called
+    /* 
+     * Return the byte in the UARTs receive buffer. This function is called
      * by the protocol stack after pxMBFrameCBByteReceived( ) has been called.
      */
+    // receive bytes through LL
+    *pucByte = LL_USART_ReceiveData8(MODBUS_USART);
     return TRUE;
 }
 
-/* Create an interrupt handler for the transmit buffer empty interrupt
+/* 
+ * Create an interrupt handler for the transmit buffer empty interrupt
  * (or an equivalent) for your target processor. This function should then
  * call pxMBFrameCBTransmitterEmpty( ) which tells the protocol stack that
  * a new character can be sent. The protocol stack will then call 
@@ -73,7 +110,8 @@ static void prvvUARTTxReadyISR( void )
     pxMBFrameCBTransmitterEmpty(  );
 }
 
-/* Create an interrupt handler for the receive interrupt for your target
+/* 
+ * Create an interrupt handler for the receive interrupt for your target
  * processor. This function should then call pxMBFrameCBByteReceived( ). The
  * protocol stack will then call xMBPortSerialGetByte( ) to retrieve the
  * character.

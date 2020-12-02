@@ -13,7 +13,7 @@
                 "${workspaceFolder}/port"
             ],
             "defines": [
-                "USE_LL_DRIVER",
+                "USE_HAL_DRIVER",
                 "STM32F407xx"  
             ],
             "compilerPath": "E:/9 2020-q2-update/bin/arm-none-eabi-gcc.exe",

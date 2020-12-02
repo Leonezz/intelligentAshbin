@@ -21,10 +21,12 @@
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
-
+#include "stm32f4xx_hal_tim.h"
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
+ 
+#define MODBUS_TIMER TIM6
 
 /* ----------------------- static functions ---------------------------------*/
 static void prvvTIMERExpiredISR( void );
@@ -33,7 +35,8 @@ static void prvvTIMERExpiredISR( void );
 BOOL
 xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
-    return FALSE;
+    // the timer will be initialized in the main function
+    return TRUE;
 }
 
 
