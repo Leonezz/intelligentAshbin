@@ -49,6 +49,8 @@ void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
     {
         // enable the USART receive data reguster
         LL_USART_EnableIT_RXNE(MODBUS_USART);
+        // the modbusTxEnable_Pin(PC0) connected to the enable pin of RS485 chip
+        // set to 0 for reveive mode
         LL_GPIO_ResetOutputPin(modbusTxEnable_GPIO_Port, modbusTxEnable_Pin);
         // delay for RS485 to process last data, fail to send the last byte if deleted
         DELAY(1000);
@@ -64,7 +66,8 @@ void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
     {        
         // enable serial transmit data register
         LL_USART_EnableIT_TXE(MODBUS_USART);
-        //DELAY(1000);
+        // the modbusTxEnable_Pin(PC0) connected to the enable pin of RS485 chip
+        // set to 1 for transmit mode
         LL_GPIO_SetOutputPin(modbusTxEnable_GPIO_Port, modbusTxEnable_Pin);
         // delay for RS485 to process last data
         DELAY(1000);
