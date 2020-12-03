@@ -28,7 +28,20 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
+#include "stm32f4xx_ll_adc.h"
+#include "stm32f4xx_ll_rcc.h"
+#include "stm32f4xx_ll_bus.h"
+#include "stm32f4xx_ll_system.h"
+#include "stm32f4xx_ll_exti.h"
+#include "stm32f4xx_ll_cortex.h"
+#include "stm32f4xx_ll_utils.h"
+#include "stm32f4xx_ll_pwr.h"
+#include "stm32f4xx_ll_dma.h"
+#include "stm32f4xx_ll_gpio.h"
+
+#if defined(USE_FULL_ASSERT)
+#include "stm32_assert.h"
+#endif /* USE_FULL_ASSERT */
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -58,16 +71,28 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED_R_Pin GPIO_PIN_6
+#define LED_R_Pin LL_GPIO_PIN_6
 #define LED_R_GPIO_Port GPIOF
-#define LED_G_Pin GPIO_PIN_7
+#define LED_G_Pin LL_GPIO_PIN_7
 #define LED_G_GPIO_Port GPIOF
-#define LED_B_Pin GPIO_PIN_8
+#define LED_B_Pin LL_GPIO_PIN_8
 #define LED_B_GPIO_Port GPIOF
-#define MQ_ANALOG_IN_Pin GPIO_PIN_2
+#define MQ_ANALOG_IN_Pin LL_GPIO_PIN_2
 #define MQ_ANALOG_IN_GPIO_Port GPIOA
-#define MQ_TTL_INPUT_Pin GPIO_PIN_3
+#define MQ_TTL_INPUT_Pin LL_GPIO_PIN_3
 #define MQ_TTL_INPUT_GPIO_Port GPIOA
+#ifndef NVIC_PRIORITYGROUP_0
+#define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
+                                                                 4 bits for subpriority */
+#define NVIC_PRIORITYGROUP_1         ((uint32_t)0x00000006) /*!< 1 bit  for pre-emption priority,
+                                                                 3 bits for subpriority */
+#define NVIC_PRIORITYGROUP_2         ((uint32_t)0x00000005) /*!< 2 bits for pre-emption priority,
+                                                                 2 bits for subpriority */
+#define NVIC_PRIORITYGROUP_3         ((uint32_t)0x00000004) /*!< 3 bits for pre-emption priority,
+                                                                 1 bit  for subpriority */
+#define NVIC_PRIORITYGROUP_4         ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority,
+                                                                 0 bit  for subpriority */
+#endif
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

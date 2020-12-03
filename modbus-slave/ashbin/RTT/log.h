@@ -26,9 +26,9 @@
 #define LOG(format,...) LOG_PROTO("","",format,##__VA_ARGS__)
 
 /* 有颜色格式日志输出 */
-#define LOGI(format,...) LOG_PROTO("I: ", RTT_CTRL_TEXT_BRIGHT_GREEN , format, ##__VA_ARGS__)
-#define LOGW(format,...) LOG_PROTO("W: ", RTT_CTRL_TEXT_BRIGHT_YELLOW, format, ##__VA_ARGS__)
-#define LOGE(format,...) LOG_PROTO("E: ", RTT_CTRL_TEXT_BRIGHT_RED   , format, ##__VA_ARGS__)
+#define LOGI(format,...) LOG_PROTO("Info: ", RTT_CTRL_TEXT_BRIGHT_GREEN , format, ##__VA_ARGS__)
+#define LOGW(format,...) LOG_PROTO("Warning: ", RTT_CTRL_TEXT_BRIGHT_YELLOW, format, ##__VA_ARGS__)
+#define LOGE(format,...) LOG_PROTO("Error: ", RTT_CTRL_TEXT_BRIGHT_RED   , format, ##__VA_ARGS__)
 
 #else
 #define LOG_CLEAR()

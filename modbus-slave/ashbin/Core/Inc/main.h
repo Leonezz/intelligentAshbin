@@ -83,6 +83,8 @@ void Error_Handler(void);
 #define modbusSlaveUSART_TX_GPIO_Port GPIOA
 #define modbusSlaveUSART_RX_Pin LL_GPIO_PIN_3
 #define modbusSlaveUSART_RX_GPIO_Port GPIOA
+#define modbusTxEnable_Pin LL_GPIO_PIN_0
+#define modbusTxEnable_GPIO_Port GPIOC
 #define temperatureAndHumidityUSART_TX_Pin LL_GPIO_PIN_9
 #define temperatureAndHumidityUSART_TX_GPIO_Port GPIOA
 #define smokeI2C_SCL_Pin LL_GPIO_PIN_6
