@@ -1,0 +1,25 @@
+#ifndef PERIALS_H
+#define PERIALS_H
+
+#ifndef BOARD_SLAVE_ADDR
+#define BOARD_SLAVE_ADDR 1
+#endif
+
+#ifndef BOARD_MODBUS_BAUD
+#define BOARD_MODBUS_BAUD 115200
+#endif
+
+#ifndef BOARD_MODBUS_USART
+#define BOARD_MODBUS_USART USART2
+#endif
+
+#ifndef BOARD_MODBUS_PARITY
+#define BOARD_MODBUS_PARITY MB_PAR_NONE
+#endif
+
+#ifndef BOARD_MODBUS_MODE
+#define BOARD_MODBUS_MODE MB_RTU
+#endif
+
+
+#endif

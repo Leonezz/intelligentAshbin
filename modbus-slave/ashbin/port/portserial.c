@@ -44,33 +44,32 @@ void vMBPortSerialEnable(BOOL xRxEnable, BOOL xTxEnable)
      * If xRXEnable enable serial receive interrupts. If xTxENable enable
      * transmitter empty interrupts.
      */
-    // enable serial receive interrupts or disable
     if (xRxEnable)
     {
         // enable the USART receive data reguster
         LL_USART_EnableIT_RXNE(MODBUS_USART);
         // the modbusTxEnable_Pin(PC0) connected to the enable pin of RS485 chip
         // set to 0 for reveive mode
+        DELAY(10000);
         LL_GPIO_ResetOutputPin(modbusTxEnable_GPIO_Port, modbusTxEnable_Pin);
         // delay for RS485 to process last data, fail to send the last byte if deleted
-        DELAY(1000);
+        DELAY(10000);
     }
-
     else
     {
         // disable the USART receive data register
         LL_USART_DisableIT_RXNE(MODBUS_USART);
     }
-    // enable serial transmit interrupts or disable
     if (xTxEnable)
     {        
         // enable serial transmit data register
         LL_USART_EnableIT_TXE(MODBUS_USART);
         // the modbusTxEnable_Pin(PC0) connected to the enable pin of RS485 chip
         // set to 1 for transmit mode
+        DELAY(10000);
         LL_GPIO_SetOutputPin(modbusTxEnable_GPIO_Port, modbusTxEnable_Pin);
         // delay for RS485 to process last data
-        DELAY(1000);
+        DELAY(10000);
     }
     else
     {
@@ -97,7 +96,7 @@ BOOL xMBPortSerialPutByte(CHAR ucByte)
 {
     // transmit a byte through stm LL
     LL_USART_TransmitData8(MODBUS_USART, (uint8_t)ucByte);
-    LOGI("send char: %d", ucByte);
+    //LOGI("send char: %d", ucByte);
     return TRUE;
 }
 
@@ -112,7 +111,7 @@ BOOL xMBPortSerialGetByte(CHAR *pucByte)
 {
     // receive bytes through stm LL
     *pucByte = LL_USART_ReceiveData8(MODBUS_USART);
-    LOGI("get char: %d", *pucByte);
+    //LOGI("get char: %d", *pucByte);
     return TRUE;
 }
 

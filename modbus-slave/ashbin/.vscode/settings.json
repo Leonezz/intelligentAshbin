@@ -7,6 +7,10 @@
         "stm32f4xx.h": "c",
         "stm32f4xx_hal.h": "c",
         "mbconfig.h": "c",
-        "mbrtu.h": "c"
+        "mbrtu.h": "c",
+        "gas.h": "c",
+        "modbushandler.h": "c",
+        "usart.h": "c",
+        "uart_periphs.h": "c"
     }
 }

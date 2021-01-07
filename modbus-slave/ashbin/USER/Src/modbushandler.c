@@ -2,9 +2,13 @@
 #include "stm32f4xx_ll_tim.h"
 #include "stm32f4xx_ll_usart.h"
 #include "defines.h"
+#include "putter.h"
 // input register initialize
 USHORT usRegInputStart = REG_INPUT_START;
-USHORT usRegInputBuf[REG_INPUT_NREGS] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+USHORT usRegInputBuf[REG_INPUT_NREGS] = {0, 0, 0, 0, 0};
+
+UCHAR usRegCoilsStart = REG_COILS_START;
+UCHAR usRegCoilsBuf[REG_COILS_NREGS] = {0};
 
 /**
  * @name    : eMBRegInputCB
@@ -77,7 +81,35 @@ eMBErrorCode
 eMBRegCoilsCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils,
               eMBRegisterMode eMode)
 {
-    return MB_ENOREG;
+    eMBErrorCode eStatus = MB_ENOERR;
+
+    int coilsIndex;
+    if ((usAddress >= REG_COILS_START) && ((usAddress + usNCoils) <= (REG_COILS_START + REG_COILS_NREGS)))
+    {
+        coilsIndex = (int)(usAddress - usRegCoilsStart);
+        while (usNCoils > 0)
+        {
+            if (eMode == MB_REG_READ)
+            {
+                *pucRegBuffer++ = usRegCoilsBuf[coilsIndex];
+            }
+            else
+            {
+                turnPutter();
+            }
+
+            coilsIndex++;
+            usNCoils--;
+        }
+    }
+    // address in wrong range
+    else
+    {
+        // no such register
+        eStatus = MB_ENOREG;
+    }
+
+    return eStatus;
 }
 
 /**
@@ -94,4 +126,3 @@ eMBRegDiscreteCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete)
 {
     return MB_ENOREG;
 }
-

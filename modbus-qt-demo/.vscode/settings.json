@@ -2,6 +2,7 @@
     "files.associations": {
         "*.m": "matlab",
         "*.tex": "latex",
-        "qserialportinfo": "cpp"
+        "qserialportinfo": "cpp",
+        "thread": "cpp"
     }
 }
