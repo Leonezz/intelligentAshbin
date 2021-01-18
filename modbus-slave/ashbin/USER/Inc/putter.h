@@ -1,6 +1,10 @@
 #ifndef PUTTER_H
 #define PUTTER_H
 #include "modbushandler.h"
-void turnPutter();
-void keyScan();
+#include "indicator.h"
+inline void turnPutter();
+inline void setPutterOpen();
+inline void setPutterClose();
+inline void keyScan();
+inline void stopperScan();
 #endif

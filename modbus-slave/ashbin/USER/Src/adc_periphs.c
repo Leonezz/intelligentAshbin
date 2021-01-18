@@ -1,9 +1,9 @@
 #include "adc_periphs.h"
 
 uint16_t ADCBuf[ADCBufSize] = {1};
-void loadGasData()
+void loadGasDataToModbusProtocolStack()
 {
-  usRegInputBuf[REG_GAS_ADDR] = ADCBuf[GAS_ADCBUF_ADDR];
+  setGasConcentrationValue(ADCBuf[GAS_ADCBUF_ADDR]);
 }
 
 void ADC_DMA_Config()

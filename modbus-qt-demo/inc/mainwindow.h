@@ -32,12 +32,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public:
+    static QString &&querryUserInfoFromDataBase(const QString &id);
+
 private:
     void initToolBarActions();
     void initSerialDialog();
     void initStatusBar();
     void initModbusClient();
     void initTabWidget();
+    void initDataBase();
 private slots:
     void addDevice();
     void serialSettingDialogExec();
@@ -49,13 +53,14 @@ private slots:
     void removeDevice();
     void addRequestToQueue(const int slaveID, const SensorType sensor, int data, const int op);
     void requestModbus();
-    void getModbusReply(int data, int slaveID, SensorType sensor);
+    void getModbusReply(const QVector<qint16> &data, int slaveID, SensorType sensor);
 signals:
-    void sendSensorDataToDevice(int id, const SensorType sensor, const int data);
+    void sendSensorDataToDevice(int id, const SensorType sensor, const QVector<qint16> &data);
 
 private:
     Ui::MainWindow *ui;
     int m_slaveCount;
+    static QJsonObject m_database;
     QAction *m_actionNewDevice;
     QAction *m_actionSerialSetting;
     QAction *m_actionConnectSerial;
@@ -69,6 +74,7 @@ private:
     QQueue<RequestInfo> m_requestQueue;
     QTimer *m_requestTimer;
     quint64 request_cnt = 0;
-    quint64 reply_cnt = 0; 
+    quint64 reply_cnt = 0;
 };
+
 #endif // MAINWINDOW_H

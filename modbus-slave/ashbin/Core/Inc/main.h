@@ -31,8 +31,6 @@ extern "C" {
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_ll_adc.h"
 #include "stm32f4xx_ll_dma.h"
-#include "stm32f4xx.h"
-#include "stm32f4xx_ll_i2c.h"
 #include "stm32f4xx_ll_rcc.h"
 #include "stm32f4xx_ll_bus.h"
 #include "stm32f4xx_ll_system.h"
@@ -72,6 +70,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define full_Pin GPIO_PIN_2
+#define full_GPIO_Port GPIOE
 #define modbusTxEnable_Pin GPIO_PIN_0
 #define modbusTxEnable_GPIO_Port GPIOC
 #define triggerPutterKey_Pin GPIO_PIN_0
@@ -86,16 +86,28 @@ void Error_Handler(void);
 #define weightUART_TX_GPIO_Port GPIOB
 #define weightUART_RX_Pin GPIO_PIN_11
 #define weightUART_RX_GPIO_Port GPIOB
+#define scaner_RTS_Pin GPIO_PIN_8
+#define scaner_RTS_GPIO_Port GPIOG
+#define putterControll_Pin GPIO_PIN_9
+#define putterControll_GPIO_Port GPIOC
 #define temperatureAndHumidityUSART_TX_Pin GPIO_PIN_9
 #define temperatureAndHumidityUSART_TX_GPIO_Port GPIOA
 #define temperatureAndHumidityUSART_RX_Pin GPIO_PIN_10
 #define temperatureAndHumidityUSART_RX_GPIO_Port GPIOA
-#define smokeI2C_SCL_Pin GPIO_PIN_6
-#define smokeI2C_SCL_GPIO_Port GPIOB
-#define smokeI2C_SDA_Pin GPIO_PIN_7
-#define smokeI2C_SDA_GPIO_Port GPIOB
-#define putterControll_Pin GPIO_PIN_8
-#define putterControll_GPIO_Port GPIOB
+#define stopper_Pin GPIO_PIN_10
+#define stopper_GPIO_Port GPIOC
+#define triggerPutterKey_OFFBOARD_Pin GPIO_PIN_11
+#define triggerPutterKey_OFFBOARD_GPIO_Port GPIOC
+#define distance_Tx_Pin GPIO_PIN_12
+#define distance_Tx_GPIO_Port GPIOC
+#define distance_Rx_Pin GPIO_PIN_2
+#define distance_Rx_GPIO_Port GPIOD
+#define fullIndicator_Pin GPIO_PIN_3
+#define fullIndicator_GPIO_Port GPIOB
+#define weightIndicator_Pin GPIO_PIN_4
+#define weightIndicator_GPIO_Port GPIOB
+#define tempreatureIndicator_Pin GPIO_PIN_5
+#define tempreatureIndicator_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

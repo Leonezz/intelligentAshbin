@@ -99,14 +99,13 @@ void Modbus::readyRead()
         const QModbusDataUnit unit = reply->result();
         if (unit.registerType() != QModbusDataUnit::RegisterType::Coils)
         {
-            sensor = static_cast<SensorType>(unit.startAddress());
+            sensor = c_startAddrToSensor[unit.startAddress()];
         }
         const int dataLength = c_dataLength[sensor];
-        qint32 result = 0;
+        QVector<qint16> result;
         for (int i = 0; i < dataLength; ++i)
         {
-            result <<= 16;
-            result += unit.value(i);
+            result.append(unit.value(i));
         }
         emit reportData(result, reply->serverAddress(), sensor);
     }

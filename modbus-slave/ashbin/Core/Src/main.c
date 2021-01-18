@@ -22,7 +22,6 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
-#include "i2c.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -35,6 +34,7 @@
 #include "uart_periphs.h"
 #include "putter.h"
 #include "perials_board.h"
+#include "infrared.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +65,13 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void autoOpenWhenUserComing()
+{
+  if (getUltraSoundValue() <= 300)
+  {
+    setPutterOpen();
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -98,18 +104,21 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_ADC1_Init();
-  MX_I2C1_Init();
   MX_TIM10_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_TIM2_Init();
+  MX_UART5_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
 
   // NOTE: these initialtions need an order, do not change it without test.
   ADC_DMA_Config();
-  USART1_DMA_Config();
-  USART3_DMA_Config();
+  tempreatureAndHumityUSART_DMA_Config();
+  weightUSART_DMA_Config();
+  scanerUSART_DMA_Config();
+  ultraSoundUART_DMA_Config();
   LL_TIM_EnableIT_UPDATE(TIM2);
   LL_TIM_EnableCounter(TIM2);
 
@@ -125,12 +134,19 @@ int main(void)
   {
     eMBPoll();
     keyScan();
+    stopperScan();
+    updateFullStatus();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    loadGasData();
-    loadTempreatureAndHumidyData();
-    loadWeightData();
+    loadGasDataToModbusProtocolStack();
+    loadUltraSoundDataToMoubusProtocolStack();
+
+    autoOpenWhenUserComing();
+
+    updateTempreatureIndicator();
+    updateWeightIndicator();
+    updateFullIndicator();
   }
   /* USER CODE END 3 */
 }

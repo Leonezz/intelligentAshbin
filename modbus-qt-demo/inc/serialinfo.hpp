@@ -16,5 +16,8 @@ enum SensorType
     Humidity = 1,
     Gas = 2,
     Weight = 3,
-    Putter = 4
+    Putter = 4,
+    Scaner = 5,
+    Ultrasound = 6,
+    Infrared = 7
 };

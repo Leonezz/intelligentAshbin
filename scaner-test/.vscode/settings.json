@@ -1,0 +1,16 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "files.associations": {
+        "*.m": "matlab",
+        "*.tex": "latex",
+        "stm32f4xx_ll_tim.h": "c",
+        "stm32f4xx.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "mbconfig.h": "c",
+        "mbrtu.h": "c",
+        "gas.h": "c",
+        "modbushandler.h": "c",
+        "usart.h": "c",
+        "uart_periphs.h": "c"
+    }
+}

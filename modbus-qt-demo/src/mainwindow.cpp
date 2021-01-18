@@ -2,12 +2,7 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-    , m_slaveCount(0)
-    , m_modbusClient(new Modbus)
-    , m_serialConnected(false)
-    , m_requestTimer(new QTimer)
+    : QMainWindow(parent), ui(new Ui::MainWindow), m_slaveCount(0), m_modbusClient(new Modbus), m_serialConnected(false), m_requestTimer(new QTimer)
 {
     ui->setupUi(this);
     initToolBarActions();
@@ -15,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     initStatusBar();
     initTabWidget();
     initModbusClient();
+    initDataBase();
     m_requestTimer->start(50);
     connect(m_requestTimer, &QTimer::timeout, this, &MainWindow::requestModbus);
     this->setWindowTitle(tr("Modbus Master demo"));
@@ -65,7 +61,7 @@ void MainWindow::initModbusClient()
     connect(m_modbusClient, &Modbus::reportData, this, &MainWindow::getModbusReply);
 }
 
-void MainWindow::getModbusReply(int data, int slaveID, SensorType sensor)
+void MainWindow::getModbusReply(const QVector<qint16> &data, int slaveID, SensorType sensor)
 {
     emit sendSensorDataToDevice(slaveID, sensor, data);
     reply_cnt++;
@@ -157,7 +153,33 @@ void MainWindow::statusError(const QString &msg)
     this->m_statusLabel->setText("Error: " + msg);
 }
 
+void MainWindow::initDataBase()
+{
+    QFile file("./json/database.json");
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        return;
+    }
+    QJsonParseError jsonParserError;
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll(), &jsonParserError);
+    file.close();
+    if (!doc.isObject() || jsonParserError.error != QJsonParseError::NoError)
+    {
+        statusError(tr("Json data base broke."));
+    }
+    m_database = doc.object();
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+QString&& MainWindow::querryUserInfoFromDataBase(const QString& id)
+{
+    if(m_database.contains(id))
+    {
+        return std::move(m_database.value(id).toString());
+    }
+    return std::move(QString());
 }

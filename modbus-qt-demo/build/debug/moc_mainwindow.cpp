@@ -10,6 +10,7 @@
 #include "../../inc/mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -22,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[23];
-    char stringdata0[267];
+    QByteArrayData data[24];
+    char stringdata0[283];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,28 +39,29 @@ QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 2), // "id"
 QT_MOC_LITERAL(4, 38, 10), // "SensorType"
 QT_MOC_LITERAL(5, 49, 6), // "sensor"
-QT_MOC_LITERAL(6, 56, 4), // "data"
-QT_MOC_LITERAL(7, 61, 9), // "addDevice"
-QT_MOC_LITERAL(8, 71, 23), // "serialSettingDialogExec"
-QT_MOC_LITERAL(9, 95, 28), // "actionConnectSerialTriggered"
-QT_MOC_LITERAL(10, 124, 17), // "getSerialSettings"
-QT_MOC_LITERAL(11, 142, 10), // "SerialInfo"
-QT_MOC_LITERAL(12, 153, 4), // "info"
-QT_MOC_LITERAL(13, 158, 10), // "statusInfo"
-QT_MOC_LITERAL(14, 169, 3), // "msg"
-QT_MOC_LITERAL(15, 173, 10), // "statusWarn"
-QT_MOC_LITERAL(16, 184, 11), // "statusError"
-QT_MOC_LITERAL(17, 196, 12), // "removeDevice"
-QT_MOC_LITERAL(18, 209, 17), // "addRequestToQueue"
-QT_MOC_LITERAL(19, 227, 7), // "slaveID"
-QT_MOC_LITERAL(20, 235, 2), // "op"
-QT_MOC_LITERAL(21, 238, 13), // "requestModbus"
-QT_MOC_LITERAL(22, 252, 14) // "getModbusReply"
+QT_MOC_LITERAL(6, 56, 15), // "QVector<qint16>"
+QT_MOC_LITERAL(7, 72, 4), // "data"
+QT_MOC_LITERAL(8, 77, 9), // "addDevice"
+QT_MOC_LITERAL(9, 87, 23), // "serialSettingDialogExec"
+QT_MOC_LITERAL(10, 111, 28), // "actionConnectSerialTriggered"
+QT_MOC_LITERAL(11, 140, 17), // "getSerialSettings"
+QT_MOC_LITERAL(12, 158, 10), // "SerialInfo"
+QT_MOC_LITERAL(13, 169, 4), // "info"
+QT_MOC_LITERAL(14, 174, 10), // "statusInfo"
+QT_MOC_LITERAL(15, 185, 3), // "msg"
+QT_MOC_LITERAL(16, 189, 10), // "statusWarn"
+QT_MOC_LITERAL(17, 200, 11), // "statusError"
+QT_MOC_LITERAL(18, 212, 12), // "removeDevice"
+QT_MOC_LITERAL(19, 225, 17), // "addRequestToQueue"
+QT_MOC_LITERAL(20, 243, 7), // "slaveID"
+QT_MOC_LITERAL(21, 251, 2), // "op"
+QT_MOC_LITERAL(22, 254, 13), // "requestModbus"
+QT_MOC_LITERAL(23, 268, 14) // "getModbusReply"
 
     },
     "MainWindow\0sendSensorDataToDevice\0\0"
-    "id\0SensorType\0sensor\0data\0addDevice\0"
-    "serialSettingDialogExec\0"
+    "id\0SensorType\0sensor\0QVector<qint16>\0"
+    "data\0addDevice\0serialSettingDialogExec\0"
     "actionConnectSerialTriggered\0"
     "getSerialSettings\0SerialInfo\0info\0"
     "statusInfo\0msg\0statusWarn\0statusError\0"
@@ -85,33 +87,33 @@ static const uint qt_meta_data_MainWindow[] = {
        1,    3,   74,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   81,    2, 0x08 /* Private */,
-       8,    0,   82,    2, 0x08 /* Private */,
-       9,    0,   83,    2, 0x08 /* Private */,
-      10,    1,   84,    2, 0x08 /* Private */,
-      13,    1,   87,    2, 0x08 /* Private */,
-      15,    1,   90,    2, 0x08 /* Private */,
-      16,    1,   93,    2, 0x08 /* Private */,
-      17,    0,   96,    2, 0x08 /* Private */,
-      18,    4,   97,    2, 0x08 /* Private */,
-      21,    0,  106,    2, 0x08 /* Private */,
-      22,    3,  107,    2, 0x08 /* Private */,
+       8,    0,   81,    2, 0x08 /* Private */,
+       9,    0,   82,    2, 0x08 /* Private */,
+      10,    0,   83,    2, 0x08 /* Private */,
+      11,    1,   84,    2, 0x08 /* Private */,
+      14,    1,   87,    2, 0x08 /* Private */,
+      16,    1,   90,    2, 0x08 /* Private */,
+      17,    1,   93,    2, 0x08 /* Private */,
+      18,    0,   96,    2, 0x08 /* Private */,
+      19,    4,   97,    2, 0x08 /* Private */,
+      22,    0,  106,    2, 0x08 /* Private */,
+      23,    3,  107,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int,    3,    5,    6,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, 0x80000000 | 6,    3,    5,    7,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 11,   12,
-    QMetaType::Void, QMetaType::QString,   14,
-    QMetaType::Void, QMetaType::QString,   14,
-    QMetaType::Void, QMetaType::QString,   14,
+    QMetaType::Void, 0x80000000 | 12,   13,
+    QMetaType::Void, QMetaType::QString,   15,
+    QMetaType::Void, QMetaType::QString,   15,
+    QMetaType::Void, QMetaType::QString,   15,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int, QMetaType::Int,   19,    5,    6,   20,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 4, QMetaType::Int, QMetaType::Int,   20,    5,    7,   21,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, 0x80000000 | 4,    6,   19,    5,
+    QMetaType::Void, 0x80000000 | 6, QMetaType::Int, 0x80000000 | 4,    7,   20,    5,
 
        0        // eod
 };
@@ -122,7 +124,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->sendSensorDataToDevice((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const SensorType(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
+        case 0: _t->sendSensorDataToDevice((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const SensorType(*)>(_a[2])),(*reinterpret_cast< const QVector<qint16>(*)>(_a[3]))); break;
         case 1: _t->addDevice(); break;
         case 2: _t->serialSettingDialogExec(); break;
         case 3: _t->actionConnectSerialTriggered(); break;
@@ -133,13 +135,31 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->removeDevice(); break;
         case 9: _t->addRequestToQueue((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const SensorType(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4]))); break;
         case 10: _t->requestModbus(); break;
-        case 11: _t->getModbusReply((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< SensorType(*)>(_a[3]))); break;
+        case 11: _t->getModbusReply((*reinterpret_cast< const QVector<qint16>(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< SensorType(*)>(_a[3]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 2:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<qint16> >(); break;
+            }
+            break;
+        case 11:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<qint16> >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (MainWindow::*)(int , const SensorType , const int );
+            using _t = void (MainWindow::*)(int , const SensorType , const QVector<qint16> & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&MainWindow::sendSensorDataToDevice)) {
                 *result = 0;
                 return;
@@ -182,14 +202,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 12)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            qt_static_metacall(this, _c, _id, _a);
         _id -= 12;
     }
     return _id;
 }
 
 // SIGNAL 0
-void MainWindow::sendSensorDataToDevice(int _t1, const SensorType _t2, const int _t3)
+void MainWindow::sendSensorDataToDevice(int _t1, const SensorType _t2, const QVector<qint16> & _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

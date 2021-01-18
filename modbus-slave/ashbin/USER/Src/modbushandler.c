@@ -5,7 +5,7 @@
 #include "putter.h"
 // input register initialize
 USHORT usRegInputStart = REG_INPUT_START;
-USHORT usRegInputBuf[REG_INPUT_NREGS] = {0, 0, 0, 0, 0};
+USHORT usRegInputBuf[REG_INPUT_NREGS] = {0};
 
 UCHAR usRegCoilsStart = REG_COILS_START;
 UCHAR usRegCoilsBuf[REG_COILS_NREGS] = {0};
@@ -39,6 +39,11 @@ eMBRegInputCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs)
                 (unsigned char)(usRegInputBuf[iRegIndex] & 0xFF);
             iRegIndex++;
             usNRegs--;
+        }
+        // if the qrcode is read, set it invalid
+        if(usAddress == REG_SCANER_VALID_ADDR)
+        {
+            setScanerDataValidStatus(INVALID);
         }
     }
     // address in wrong range
