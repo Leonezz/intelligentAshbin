@@ -175,11 +175,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QString&& MainWindow::querryUserInfoFromDataBase(const QString& id)
+const QString MainWindow::querryUserInfoFromDataBase(const QString &id)
 {
-    if(m_database.contains(id))
+    if (m_database.contains(id))
     {
-        return std::move(m_database.value(id).toString());
+        return QJsonDocument(m_database.value(id).toObject()).toJson();
     }
-    return std::move(QString());
+    return QString();
 }

@@ -96,11 +96,18 @@ eMBRegCoilsCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils,
         {
             if (eMode == MB_REG_READ)
             {
-                *pucRegBuffer++ = usRegCoilsBuf[coilsIndex];
+                *pucRegBuffer++ = getPutterStatus();
             }
             else
             {
-                turnPutter();
+                if(*pucRegBuffer==0)
+                {
+                    setPutterClose();
+                }
+                else
+                {
+                    setPutterOpen();
+                }
             }
 
             coilsIndex++;

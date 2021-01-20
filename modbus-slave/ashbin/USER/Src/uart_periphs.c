@@ -152,9 +152,10 @@ void scanerUSART_Rx_IQR()
 void scanerUSART_DMA_Config()
 {
     // recive DMA
-    LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_1, (uint32_t)(scanerRxBuf + 1));
-    LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_1, LL_USART_DMA_GetRegAddr(USART6));
     LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_1, USART6_RX_LENGTH);
+    LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_1, (uint32_t)(scanerRxBuf));
+    LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_1, LL_USART_DMA_GetRegAddr(USART6));
+
     LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_1);
 
     LL_USART_EnableIT_IDLE(USART6);

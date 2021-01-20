@@ -86,8 +86,6 @@ void Error_Handler(void);
 #define weightUART_TX_GPIO_Port GPIOB
 #define weightUART_RX_Pin GPIO_PIN_11
 #define weightUART_RX_GPIO_Port GPIOB
-#define scaner_RTS_Pin GPIO_PIN_8
-#define scaner_RTS_GPIO_Port GPIOG
 #define putterControll_Pin GPIO_PIN_9
 #define putterControll_GPIO_Port GPIOC
 #define temperatureAndHumidityUSART_TX_Pin GPIO_PIN_9

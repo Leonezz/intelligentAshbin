@@ -4,6 +4,7 @@
 
 /* modbus includes */
 #include "mb.h"
+#include "log.h"
 //#include "mbport.h"
 // input register start address
 #define REG_INPUT_START 0
@@ -20,10 +21,11 @@
 #define REG_WEIGHT_ADDR 3
 #define REG_WEIGHT_LENGTH 2
 
-/** QRCode data stores at REG_SCANER_ADDR, length is 13,
-/* the byte at REG_SCANER_VALID_ADDR determins the data is valid or not.
-/* QRCode data if valid if usRegInputBuf[REG_SCANER_VALID_ADDR] == 1,
-/* invalid if usRegInputBuf[REG_SCANER_VALID_ADDR] == 0
+/** 
+ * QRCode data stores at REG_SCANER_ADDR, length is 13,
+ * the byte at REG_SCANER_VALID_ADDR determins the data is valid or not.
+ * QRCode data if valid if usRegInputBuf[REG_SCANER_VALID_ADDR] == 1,
+ * invalid if usRegInputBuf[REG_SCANER_VALID_ADDR] == 0
 **/
 #define REG_SCANER_VALID_ADDR 5
 #define REG_SCANER_ADDR 6
@@ -118,7 +120,7 @@ inline void setInfraredValue(uint16_t value)
     usRegInputBuf[REG_INFRARED_ADDR] = value;
 }
 
-inline void setScanerData(uint16_t *bytes)
+inline void setScanerData(uint8_t *bytes)
 {
     for (uint8_t index = 0; index < REG_SCANER_LENGTH - 1; ++index)
     {

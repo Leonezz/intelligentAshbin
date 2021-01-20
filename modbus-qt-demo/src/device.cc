@@ -129,15 +129,18 @@ void Device::getSensorData(const int id, const SensorType sensor, const QVector<
                  QString id;
                  for (int index = 1; index < val.length(); ++index)
                  {
-                     id += QChar(val[index]);
+                     qDebug() << (char)(val[index]);
+                     id += (char)(val[index]);
                  }
                  const QString info = MainWindow::querryUserInfoFromDataBase(id);
+                 qDebug() << info;
                  qrEncode(id);
                  this->ui->labelQRCode->setPixmap(QPixmap::fromImage(this->m_qrCodeImage));
                  if (info.isEmpty())
                  {
                      return tr("查无此人");
                  }
+                 emit requestSensoreData(m_id, SensorType::Putter, 1, 0x05);
                  return info;
              }}};
     QLabel *const label = labelMap[sensor];
@@ -148,9 +151,13 @@ void Device::getSensorData(const int id, const SensorType sensor, const QVector<
 
 void Device::qrEncode(const QString &msg)
 {
+    if (msg.isEmpty())
+        return;
     m_qrCodeImage.fill(QColor(255, 255, 255));
     const int qrAreaWidth = c_qrCodeImgWidth - 2 * c_qrCodeBorder;
     QRcode *code = QRcode_encodeString(msg.toStdString().c_str(), 0, QR_ECLEVEL_M, QR_MODE_8, 1);
+    if (code == nullptr)
+        return;
     const int qrNodeCnt = code->width;
     const int qrNodeWidth = qrAreaWidth / qrNodeCnt;
 

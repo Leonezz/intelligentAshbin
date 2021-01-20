@@ -33,7 +33,7 @@ public:
     ~MainWindow();
 
 public:
-    static QString &&querryUserInfoFromDataBase(const QString &id);
+    static const QString querryUserInfoFromDataBase(const QString &id);
 
 private:
     void initToolBarActions();

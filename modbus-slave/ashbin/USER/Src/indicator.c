@@ -1,7 +1,7 @@
 #include "indicator.h"
-#define TEMPREATURE_THRESHOLD 80
+#define TEMPREATURE_THRESHOLD 8000
 #define GASCONCENTRATION_THRESHOLD 2500
-#define WEIGHT_THRESHOLD 500
+#define WEIGHT_THRESHOLD 5000
 typedef enum FullStatus
 {
     Full = 1,
@@ -62,8 +62,8 @@ void updateWeightIndicator()
 void updateFullIndicator()
 {
     const uint8_t full = getInfraredValue();
-    HAL_GPIO_WritePin(full_GPIO_Port,
-                      full_Pin,
+    HAL_GPIO_WritePin(fullIndicator_GPIO_Port,
+                      fullIndicator_Pin,
                       full);
     if (full)
     {

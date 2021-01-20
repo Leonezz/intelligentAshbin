@@ -65,13 +65,26 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t ultraSoundValueCnt = 0;
+uint32_t ultraSoundMeanValue = 0;
 void autoOpenWhenUserComing()
 {
-  if (getUltraSoundValue() <= 300)
+  uint32_t ultraSoundTotalValue =
+      ultraSoundMeanValue * ultraSoundValueCnt;
+  ultraSoundTotalValue += getUltraSoundValue();
+  ultraSoundValueCnt++;
+  ultraSoundMeanValue = ultraSoundTotalValue / ultraSoundValueCnt;
+  if (100 == ultraSoundValueCnt)
   {
-    setPutterOpen();
+    if (ultraSoundMeanValue <= 250)
+    {
+      setPutterOpen();
+    }
+    ultraSoundValueCnt = 0;
+    ultraSoundMeanValue = 0;
   }
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -126,6 +139,7 @@ int main(void)
   eMBInit(BOARD_MODBUS_MODE, BOARD_SLAVE_ADDR, BOARD_MODBUS_USART, BOARD_MODBUS_BAUD, BOARD_MODBUS_PARITY);
   // enable modbus protocol stack
   eMBEnable();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
