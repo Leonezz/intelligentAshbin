@@ -102,7 +102,7 @@ void Modbus::readyRead()
             sensor = c_startAddrToSensor[unit.startAddress()];
         }
         const int dataLength = c_dataLength[sensor];
-        QVector<qint16> result;
+        QVector<quint16> result;
         for (int i = 0; i < dataLength; ++i)
         {
             result.append(unit.value(i));

@@ -20,7 +20,7 @@ public:
     Device(const int id, QWidget *parent = nullptr);
     ~Device();
 public slots:
-    void getSensorData(const int id, const SensorType sensor, const QVector<qint16> &data);
+    void getSensorData(const int id, const SensorType sensor, const QVector<quint16> &data);
 signals:
     void removeDevice();
     void requestSensoreData(const int id, const SensorType sensor, const int data = 0, const int op = 0x04);
@@ -30,7 +30,7 @@ private slots:
 
 private:
     void qrEncode(const QString &msg);
-    int convertRawDataToNumber(const QVector<qint16> &rawData);
+    int convertRawDataToNumber(const QVector<quint16> &rawData);
 private:
     Ui::DeviceForm *ui;
     QImage m_qrCodeImage;

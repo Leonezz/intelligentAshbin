@@ -19,7 +19,7 @@ signals:
     void warn(const QString &msg);
     void error(const QString &msg);
     // report data to mainwindow through singnal
-    void reportData(const QVector<qint16> &rawData, const int slaveAddr, const SensorType sensor);
+    void reportData(const QVector<quint16> &rawData, const int slaveAddr, const SensorType sensor);
 private slots:
     // this is called when recived a reply after request
     void readyRead();

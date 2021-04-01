@@ -1,7 +1,7 @@
 #include "indicator.h"
-#define TEMPREATURE_THRESHOLD 8000
+#define TEMPREATURE_THRESHOLD 1000
 #define GASCONCENTRATION_THRESHOLD 2500
-#define WEIGHT_THRESHOLD 5000
+#define WEIGHT_THRESHOLD 2000
 typedef enum FullStatus
 {
     Full = 1,

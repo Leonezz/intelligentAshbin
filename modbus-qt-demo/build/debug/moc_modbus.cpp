@@ -24,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Modbus_t {
     QByteArrayData data[13];
-    char stringdata0[101];
+    char stringdata0[102];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,16 +40,16 @@ QT_MOC_LITERAL(3, 13, 3), // "msg"
 QT_MOC_LITERAL(4, 17, 4), // "warn"
 QT_MOC_LITERAL(5, 22, 5), // "error"
 QT_MOC_LITERAL(6, 28, 10), // "reportData"
-QT_MOC_LITERAL(7, 39, 15), // "QVector<qint16>"
-QT_MOC_LITERAL(8, 55, 7), // "rawData"
-QT_MOC_LITERAL(9, 63, 9), // "slaveAddr"
-QT_MOC_LITERAL(10, 73, 10), // "SensorType"
-QT_MOC_LITERAL(11, 84, 6), // "sensor"
-QT_MOC_LITERAL(12, 91, 9) // "readyRead"
+QT_MOC_LITERAL(7, 39, 16), // "QVector<quint16>"
+QT_MOC_LITERAL(8, 56, 7), // "rawData"
+QT_MOC_LITERAL(9, 64, 9), // "slaveAddr"
+QT_MOC_LITERAL(10, 74, 10), // "SensorType"
+QT_MOC_LITERAL(11, 85, 6), // "sensor"
+QT_MOC_LITERAL(12, 92, 9) // "readyRead"
 
     },
     "Modbus\0info\0\0msg\0warn\0error\0reportData\0"
-    "QVector<qint16>\0rawData\0slaveAddr\0"
+    "QVector<quint16>\0rawData\0slaveAddr\0"
     "SensorType\0sensor\0readyRead"
 };
 #undef QT_MOC_LITERAL
@@ -97,7 +97,7 @@ void Modbus::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->info((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->warn((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->error((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->reportData((*reinterpret_cast< const QVector<qint16>(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const SensorType(*)>(_a[3]))); break;
+        case 3: _t->reportData((*reinterpret_cast< const QVector<quint16>(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const SensorType(*)>(_a[3]))); break;
         case 4: _t->readyRead(); break;
         default: ;
         }
@@ -108,7 +108,7 @@ void Modbus::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<qint16> >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<quint16> >(); break;
             }
             break;
         }
@@ -136,7 +136,7 @@ void Modbus::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             }
         }
         {
-            using _t = void (Modbus::*)(const QVector<qint16> & , const int , const SensorType );
+            using _t = void (Modbus::*)(const QVector<quint16> & , const int , const SensorType );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Modbus::reportData)) {
                 *result = 3;
                 return;
@@ -207,7 +207,7 @@ void Modbus::error(const QString & _t1)
 }
 
 // SIGNAL 3
-void Modbus::reportData(const QVector<qint16> & _t1, const int _t2, const SensorType _t3)
+void Modbus::reportData(const QVector<quint16> & _t1, const int _t2, const SensorType _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);

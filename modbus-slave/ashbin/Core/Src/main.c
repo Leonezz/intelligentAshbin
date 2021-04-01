@@ -65,18 +65,16 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t ultraSoundValueCnt = 0;
-uint32_t ultraSoundMeanValue = 0;
+uint32_t ultraSoundValueCnt = 0;
+uint32_t ultraSoundTotalValue = 0;
 void autoOpenWhenUserComing()
 {
-  uint32_t ultraSoundTotalValue =
-      ultraSoundMeanValue * ultraSoundValueCnt;
   ultraSoundTotalValue += getUltraSoundValue();
   ultraSoundValueCnt++;
-  ultraSoundMeanValue = ultraSoundTotalValue / ultraSoundValueCnt;
-  if (100 == ultraSoundValueCnt)
+  uint32_t ultraSoundMeanValue = ultraSoundTotalValue / ultraSoundValueCnt;
+  if (10 == ultraSoundValueCnt)
   {
-    if (ultraSoundMeanValue <= 250)
+    if (ultraSoundMeanValue <= 300 && !getPutterStatus())
     {
       setPutterOpen();
     }
@@ -139,13 +137,14 @@ int main(void)
   eMBInit(BOARD_MODBUS_MODE, BOARD_SLAVE_ADDR, BOARD_MODBUS_USART, BOARD_MODBUS_BAUD, BOARD_MODBUS_PARITY);
   // enable modbus protocol stack
   eMBEnable();
-
+  setPutterClose();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     eMBPoll();
     keyScan();
     stopperScan();
@@ -156,7 +155,7 @@ int main(void)
     loadGasDataToModbusProtocolStack();
     loadUltraSoundDataToMoubusProtocolStack();
 
-    autoOpenWhenUserComing();
+    //autoOpenWhenUserComing();
 
     updateTempreatureIndicator();
     updateWeightIndicator();

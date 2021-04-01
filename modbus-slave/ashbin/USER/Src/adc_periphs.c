@@ -1,9 +1,20 @@
 #include "adc_periphs.h"
 
 uint16_t ADCBuf[ADCBufSize] = {1};
+uint8_t gasDataSampleTime = 0;
+uint16_t gasDataMeanValue = 0;
 void loadGasDataToModbusProtocolStack()
 {
-  setGasConcentrationValue(ADCBuf[GAS_ADCBUF_ADDR]);
+  uint32_t gasDataTotalValue = gasDataMeanValue * gasDataSampleTime;
+  gasDataTotalValue += ADCBuf[GAS_ADCBUF_ADDR];
+  gasDataSampleTime++;
+  gasDataMeanValue = gasDataTotalValue / gasDataSampleTime;
+  if(100 == gasDataSampleTime)
+  {
+    setGasConcentrationValue(gasDataMeanValue);
+    gasDataSampleTime = 0;
+    gasDataTotalValue = 0;
+  }
 }
 
 void ADC_DMA_Config()

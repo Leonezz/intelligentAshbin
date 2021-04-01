@@ -1,6 +1,4 @@
-QT       += core gui serialbus serialport
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui serialbus serialport widgets
 
 TARGET = a
 
@@ -62,3 +60,6 @@ TRANSLATIONS += \
 qnx: target.path = build/
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    qrc/data.qrc

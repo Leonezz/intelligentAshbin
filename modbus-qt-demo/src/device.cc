@@ -73,9 +73,9 @@ void Device::autoReflash()
     emit requestSensoreData(m_id, SensorType::Ultrasound);
     emit requestSensoreData(m_id, SensorType::Infrared);
 }
-int Device::convertRawDataToNumber(const QVector<qint16> &rawData)
+int Device::convertRawDataToNumber(const QVector<quint16> &rawData)
 {
-    int result = 0;
+    unsigned int result = 0;
     for (auto &&unit : rawData)
     {
         result <<= 16;
@@ -83,7 +83,7 @@ int Device::convertRawDataToNumber(const QVector<qint16> &rawData)
     }
     return result;
 }
-void Device::getSensorData(const int id, const SensorType sensor, const QVector<qint16> &data)
+void Device::getSensorData(const int id, const SensorType sensor, const QVector<quint16> &data)
 {
     if (id != this->m_id)
         return;
@@ -96,32 +96,32 @@ void Device::getSensorData(const int id, const SensorType sensor, const QVector<
          {SensorType::Scaner, ui->labelUserInfo},
          {SensorType::Ultrasound, ui->labelDistance},
          {SensorType::Infrared, ui->labelFullStatus}};
-    static const QMap<SensorType, std::function<QString(const QVector<qint16> &)>> functionMap =
+    static const QMap<SensorType, std::function<QString(const QVector<quint16> &)>> functionMap =
         {
-            {SensorType::Tempreature, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Tempreature, [this](const QVector<quint16> &val) -> QString {
                  return QString::number(convertRawDataToNumber(val) / 100.0) + " ^oC";
              }},
-            {SensorType::Humidity, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Humidity, [this](const QVector<quint16> &val) -> QString {
                  return QString::number(convertRawDataToNumber(val) / 100.0) + " %";
              }},
-            {SensorType::Gas, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Gas, [this](const QVector<quint16> &val) -> QString {
                  return QString::number(convertRawDataToNumber(val) * 3.3 / 4096.0) + " v/3.3v";
              }},
-            {SensorType::Weight, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Weight, [this](const QVector<quint16> &val) -> QString {
                  return QString::number(convertRawDataToNumber(val) / 100.0) + " kg";
              }},
-            {SensorType::Putter, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Putter, [this](const QVector<quint16> &val) -> QString {
                  this->m_putterStatus = convertRawDataToNumber(val) > 0;
                  return (m_putterStatus ? tr("打开") : tr("关闭"));
              }},
-            {SensorType::Ultrasound, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Ultrasound, [this](const QVector<quint16> &val) -> QString {
                  return QString::number(convertRawDataToNumber(val)) + tr("mm");
              }},
-            {SensorType::Infrared, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Infrared, [this](const QVector<quint16> &val) -> QString {
                  return QString(convertRawDataToNumber(val) > 0 ? tr("已满")
                                                                 : tr("未满"));
              }},
-            {SensorType::Scaner, [this](const QVector<qint16> &val) -> QString {
+            {SensorType::Scaner, [this](const QVector<quint16> &val) -> QString {
                  if (val.first() == 0)
                  {
                      return ui->labelUserInfo->text();

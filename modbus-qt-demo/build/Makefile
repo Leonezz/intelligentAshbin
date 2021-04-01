@@ -291,6 +291,7 @@ Makefile: ..\modbus-demo.pro C:\Qt\5.15.0\msvc2019_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\5.15.0\msvc2019_64\lib\Qt5Core.prl \
 		C:\Qt\5.15.0\msvc2019_64\lib\qtmain.prl \
 		C:\Qt\5.15.0\msvc2019_64\mkspecs\features\build_pass.prf \
+		..\qrc\data.qrc \
 		C:\Qt\5.15.0\msvc2019_64\lib\Qt5Widgetsd.prl \
 		C:\Qt\5.15.0\msvc2019_64\lib\Qt5Guid.prl \
 		C:\Qt\5.15.0\msvc2019_64\lib\Qt5SerialBusd.prl \
@@ -505,6 +506,7 @@ C:\Qt\5.15.0\msvc2019_64\lib\Qt5SerialPort.prl:
 C:\Qt\5.15.0\msvc2019_64\lib\Qt5Core.prl:
 C:\Qt\5.15.0\msvc2019_64\lib\qtmain.prl:
 C:\Qt\5.15.0\msvc2019_64\mkspecs\features\build_pass.prf:
+..\qrc\data.qrc:
 C:\Qt\5.15.0\msvc2019_64\lib\Qt5Widgetsd.prl:
 C:\Qt\5.15.0\msvc2019_64\lib\Qt5Guid.prl:
 C:\Qt\5.15.0\msvc2019_64\lib\Qt5SerialBusd.prl:

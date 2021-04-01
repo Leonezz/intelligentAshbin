@@ -61,7 +61,7 @@ void MainWindow::initModbusClient()
     connect(m_modbusClient, &Modbus::reportData, this, &MainWindow::getModbusReply);
 }
 
-void MainWindow::getModbusReply(const QVector<qint16> &data, int slaveID, SensorType sensor)
+void MainWindow::getModbusReply(const QVector<quint16> &data, int slaveID, SensorType sensor)
 {
     emit sendSensorDataToDevice(slaveID, sensor, data);
     reply_cnt++;
@@ -155,7 +155,7 @@ void MainWindow::statusError(const QString &msg)
 
 void MainWindow::initDataBase()
 {
-    QFile file("./json/database.json");
+    QFile file(":/json/database/database");
     if (!file.open(QIODevice::ReadOnly))
     {
         return;

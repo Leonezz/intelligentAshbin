@@ -53,9 +53,9 @@ private slots:
     void removeDevice();
     void addRequestToQueue(const int slaveID, const SensorType sensor, int data, const int op);
     void requestModbus();
-    void getModbusReply(const QVector<qint16> &data, int slaveID, SensorType sensor);
+    void getModbusReply(const QVector<quint16> &data, int slaveID, SensorType sensor);
 signals:
-    void sendSensorDataToDevice(int id, const SensorType sensor, const QVector<qint16> &data);
+    void sendSensorDataToDevice(int id, const SensorType sensor, const QVector<quint16> &data);
 
 private:
     Ui::MainWindow *ui;

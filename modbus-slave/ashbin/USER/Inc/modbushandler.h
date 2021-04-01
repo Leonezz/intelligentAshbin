@@ -94,7 +94,7 @@ inline uint32_t getWeightValue()
            usRegInputBuf[REG_WEIGHT_ADDR + 1];
 }
 
-inline void setWeightValue(uint16_t high, uint16_t low)
+inline void setWeightValue(USHORT high, USHORT low)
 {
     usRegInputBuf[REG_WEIGHT_ADDR] = high;
     usRegInputBuf[REG_WEIGHT_ADDR + 1] = low;
@@ -105,7 +105,7 @@ inline USHORT getUltraSoundValue()
     return usRegInputBuf[REG_ULTRASOUND_ADDR];
 }
 
-inline void setUltraSoundValue(uint16_t value)
+inline void setUltraSoundValue(USHORT value)
 {
     usRegInputBuf[REG_ULTRASOUND_ADDR] = value;
 }
@@ -115,14 +115,14 @@ inline USHORT getInfraredValue()
     return usRegInputBuf[REG_INFRARED_ADDR];
 }
 
-inline void setInfraredValue(uint16_t value)
+inline void setInfraredValue(USHORT value)
 {
     usRegInputBuf[REG_INFRARED_ADDR] = value;
 }
 
-inline void setScanerData(uint8_t *bytes)
+inline void setScanerData(UCHAR *bytes)
 {
-    for (uint8_t index = 0; index < REG_SCANER_LENGTH - 1; ++index)
+    for (UCHAR index = 0; index < REG_SCANER_LENGTH - 1; ++index)
     {
         usRegInputBuf[index + REG_SCANER_ADDR] = bytes[index];
     }
